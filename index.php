@@ -32,12 +32,12 @@ if($data){
 
 $query = "SELECT * FROM details" ;  //will call everything from details table
 
-// if(isset($_GET['search_name']))
-// {
-//     $search_name = $_GET['search_name'];
-//     $query .= " WHERE name LIKE '%{$search_name}%'";
-// }
-// echo "SQL = ".$query;
+if(isset($_GET['search_name']))
+{
+    $search_name = $_GET['search_name'];
+    $query .= " WHERE name LIKE '%{$search_name}%'";
+}
+echo "SQL = ".$query;
 //yaha query direct nahi chalti ,use execute krwana pdta h 
 $data = mysqli_query($conn,$query); //query execute ho jaayegi 
 
