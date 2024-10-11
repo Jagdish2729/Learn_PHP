@@ -1,0 +1,16 @@
+<?php
+include("connection.php");
+$id =  $_GET['name'];
+
+$query = "DELETE FROM details WHERE name = '$id'";
+$data =  mysqli_query($conn,$query);
+if($data){
+    echo "<script> alert('Record Deleted successfully')</script>";
+    ?>
+    <meta http-equiv = "refresh" content = "0; url = http://localhost/first/display.php "/>
+    <?php
+}else{
+    echo "failed";
+}
+
+?>
