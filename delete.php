@@ -7,7 +7,7 @@ $data =  mysqli_query($conn,$query);
 if($data){
     echo "<script> alert('Record Deleted successfully')</script>";
     ?>
-    <meta http-equiv = "refresh" content = "0; url = http://localhost/first/display.php "/>
+    <meta http-equiv = "refresh" content = "0; url = http://localhost/first/index.php "/>
     <?php
 }else{
     echo "failed";
