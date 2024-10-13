@@ -54,7 +54,7 @@ $data = mysqli_query($conn,$query); //isse query execute ho jaayegi
 if($data){
     echo "data Updated sucessfully";
     ?>
-    <meta http-equiv = "refresh" content = "0; url = http://localhost/first/display.php "/>
+    <meta http-equiv = "refresh" content = "0; url = http://localhost/first/index.php "/>
     <?php
 }else{
     echo "failed";

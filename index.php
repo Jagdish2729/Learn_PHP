@@ -2,6 +2,7 @@
 <?php
 
 include("connection.php");
+
 if(isset($_POST['name']))
 {
 $name = $_POST['name'];
@@ -11,6 +12,8 @@ $phone = $_POST['phone'];
 $battingstyle = $_POST['battingstyle'];
 $bowlingstyle = $_POST['bowlingstyle'];
 $desc = $_POST['desc'];
+
+
 
 
 $query = "INSERT INTO `player_details`.`details` (`name`, `age`, `email`, `phone`, `battingstyle`, 
@@ -24,20 +27,19 @@ if($data){
 }else{
     echo "failed";
 }
+header('Location: ' . $_SERVER['PHP_SELF']); // Redirect to the same page or another page
+exit();
 }
 
 
-
-
-
-$query = "SELECT * FROM details" ;  //will call everything from details table
-
-if(isset($_GET['search_name']))
-{
-    $search_name = $_GET['search_name'];
-    $query .= " WHERE name LIKE '%{$search_name}%'";
+$limit = 5;
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+}else{
+    $page = 1;
 }
-echo "SQL = ".$query;
+$offset = ($page-1)* $limit ;
+$query = "SELECT * FROM details LIMIT {$offset},{$limit}" ;  //will call everything from details table
 //yaha query direct nahi chalti ,use execute krwana pdta h 
 $data = mysqli_query($conn,$query); //query execute ho jaayegi 
 
@@ -48,13 +50,23 @@ $total = mysqli_num_rows($data); //this will show the total number of rows prese
 if($total!=0)   //agr total rows zero se jyada h toh 
 {
     ?>
+    <button class = "add"><a href = "form.php"> ADD USER</a></button>
+    <style>
+        .add{
+            position: fixed; 
+            top: 10px;       /* Position from the top */
+            right: 10px;     /* Position from the right */
+            padding: 10px 20px; /* Button padding */
+            background-color: #4CAF50; /* Green background */
+            color: white;    /* White text */
+            border: none;    /* No border */
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        </style>
+
     <h2 align = "center" > <mark> Displaying All Records </mark></h2>
     <center>
-    <form action="search.php" method="POST"> <!-- or POST, depending on your preference -->
-        <label for="name">First Name:</label>
-        <input type="text" name="name" id="name" placeholder="Enter first name" required>
-        <input type="submit" value="Search">
-
    <table border = "1" cellspacing = "6"> 
     <tr>
     <th width = "10%">Name</th>
@@ -92,12 +104,68 @@ if($total!=0)   //agr total rows zero se jyada h toh
 else{
     echo "no records found";
 }
+?>
+</table>
+<?php
 
+$sql1 = "SELECT * FROM details" ;
+$result1 = mysqli_query($conn,$sql1) or die("query failed");
 
+if(mysqli_num_rows($result1)>0){
+
+    $total_records = mysqli_num_rows($result1);
+  
+    $total_page = ceil($total_records/$limit);
+    echo '<ul class = "pagination">';
+    if($page>1){
+        echo'<li><a href = "index.php?page='.($page-1).'"> Previous </a></li>';
+    }
+   
+    for($i=1; $i<$total_page; $i++){
+        if($i==$page){
+          $active = "active";
+        }else{
+            $active = "";
+        }
+       echo '<li class = "'.$active.'"><a href ="index.php?page='.$i.'">'.$i.'</a></li>';
+   }
+   if($total_page> $page){
+    echo'<li><a href = "index.php?page='.($page+1).'"> Next </a></li>';
+   }
+   
+    echo '</ul>';
+}
 
 ?>
+<style>
+   .pagination {
+            display: flex;               /* Flexbox to align items horizontally */
+            list-style-type: none;        /* Remove bullets */
+            padding: 0;
+            margin: 20px 0;
+            justify-content: center;      /* Center the pagination */
+        }
+        .pagination li {
+            margin: 0 5px;                /* Add space between pagination items */
+        }
+        .pagination a {
+            display: block;
+            padding: 10px 15px;           /* Padding inside the buttons */
+            text-decoration: none;        /* Remove underline from links */
+            color: #007bff;               /* Default color for links */
+            border: 1px solid #ddd;       /* Border around each page number */
+            border-radius: 5px;           /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+         /* Hover effect for pagination links */
+         .pagination a:hover {
+            background-color: #007bff;    /* Change background color on hover */
+            color: white;                 /* Change text color on hover */
+        }
+       
+</style>
 
-</table>
+
 </center>
 <script>
    function checkdelete (){
