@@ -30,6 +30,18 @@ $result =  mysqli_fetch_assoc($data);
          <textarea name="desc" id="desc" cols="20" rows="10" placeholder="Enter any other info"></textarea>     
          <button class="btn">Update</button>       
         </form>
+        <style>
+            .btn{
+                text-decoration: none;
+                color:black;
+                background-color: rgb(233, 116, 233);
+                font: 20px;
+                border: 2px solid white;
+                border-radius: 20px;
+                cursor: pointer;
+                margin: 0 10px;
+            }
+            </style>
      </div>
 <script src="index.js"></script>
 </body>

@@ -28,13 +28,23 @@ form{
     justify-content: center;
 }
 .btn{
+    text-align: center;
+}
+.btn button {
+    text-decoration: none;
     color:black;
+    margin: 0 10px; /* Add spacing between buttons */
     background-color: rgb(233, 116, 233);
-    padding: 9px 10px;
+    padding: 10px 20px;
     font: 20px;
     border: 2px solid white;
     border-radius: 20px;
     cursor: pointer;
+    
+    
+}
+.btn button:hover{
+    background-color: #218838;
 }
 .bg{
     width: 100%;

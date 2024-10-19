@@ -22,8 +22,12 @@ include("connection.php");
          <input type="text" name="battingstyle" id="battingstyle" placeholder="Enter Your Batting Style Here ">
          <input type="text" name="bowlingstyle" id="bowlingstyle" placeholder="Enter Your Bowling Style Here ">
          <textarea name="desc" id="desc" cols="20" rows="10" placeholder="Enter any other info"></textarea>     
-         <button class="btn" type = "submit">Submit</button>       
+        <div class = "btn"> 
+          <button type = "submit">Submit</button>   
+          <button type = "button"><a href = "index.php"> Cancel </a></button>   
+</div>     
         </form>
+
      </div>
 <script src="index.js"></script>
 </body>

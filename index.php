@@ -31,7 +31,22 @@ header('Location: ' . $_SERVER['PHP_SELF']); // Redirect to the same page or ano
 exit();
 }
 
+?>
+<!-- <form  method="POST"> 
+      <div >
+        <label for="name">First Name:</label>
+        <input type="text" name="search" id="name" placeholder="Enter first name" required>
+        <input  class = "search" type="submit" value="Search" name = "submit">
 
+</div> -->
+<style>
+    .search{
+        background-color : lightpink;
+        cursor:pointer;
+    }
+    </style> 
+ <?php
+   //pagination
 $limit = 5;
 if(isset($_GET['page'])){
     $page = $_GET['page'];
@@ -39,7 +54,17 @@ if(isset($_GET['page'])){
     $page = 1;
 }
 $offset = ($page-1)* $limit ;
-$query = "SELECT * FROM details LIMIT {$offset},{$limit}" ;  //will call everything from details table
+//$name = $_GET['name'];
+
+// if (isset($name)) {
+//     $query = "SELECT * FROM   details where name = $name LIMIT {$offset},{$limit}" ;
+// }else{
+//     $query = "SELECT * FROM   details where  LIMIT {$offset},{$limit}" ;
+// }
+
+// print_r($query);
+
+$query = "SELECT * FROM   details LIMIT {$offset},{$limit}" ;  //will call everything from details table
 //yaha query direct nahi chalti ,use execute krwana pdta h 
 $data = mysqli_query($conn,$query); //query execute ho jaayegi 
 
@@ -62,6 +87,7 @@ if($total!=0)   //agr total rows zero se jyada h toh
             border: none;    /* No border */
             border-radius: 5px; 
             cursor: pointer; 
+            text-decoration: none;
         }
         </style>
 
@@ -80,9 +106,11 @@ if($total!=0)   //agr total rows zero se jyada h toh
    <style> 
    .edit{
     background-color : lightgreen;
+    cursor: pointer;
    }
    .delete{
     background-color: red;
+    cursor: pointer;
    }
 </style>
 
