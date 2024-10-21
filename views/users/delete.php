@@ -1,5 +1,5 @@
 <?php
-include("connection.php");
+require_once('../../config/connection.php');
 $id =  $_GET['name'];
 
 $query = "DELETE FROM details WHERE name = '$id'";
