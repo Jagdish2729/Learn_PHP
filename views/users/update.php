@@ -1,5 +1,5 @@
 <?php
-include("connection.php");
+require_once('../../config/connection.php');
 $id =  $_GET['name'];
 $query = "SELECT * FROM details where name = '$id'" ; 
 $data = mysqli_query($conn,$query); 
@@ -13,10 +13,10 @@ $result =  mysqli_fetch_assoc($data);
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Confirmation Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../assests/css/style.css">
  </head>
 <body>
-<img class="bg" src="bg.jfif" alt="Photo">
+<img class="bg" src="../../assests/img/bg.jfif" alt="Photo">
     <div class="container">
         <h1>Update</h1>
         <p> Update Your Details Here</p>
